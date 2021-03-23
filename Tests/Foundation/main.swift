@@ -122,6 +122,7 @@ var allTestCases = [
     testCase(TestUnitVolume.allTests),
     testCase(TestNSLock.allTests),
     testCase(TestNSSortDescriptor.allTests),
+    testCase(TestUndoManager.allTests),
 ]
 
 #if !os(Windows)

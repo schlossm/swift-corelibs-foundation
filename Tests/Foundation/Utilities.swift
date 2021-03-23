@@ -599,29 +599,60 @@ extension XCTest {
         if isChildProcess {
             try block()
         } else {
-            var arguments = ProcessInfo.processInfo.arguments
+            let arguments = ProcessInfo.processInfo.arguments
             let process = Process()
             process.executableURL = URL(fileURLWithPath: arguments[0])
             
-            arguments.remove(at: 0)
-            arguments.removeAll(where: { $0.hasPrefix("TestFoundation.") })
-            arguments.append("TestFoundation." + self.name.replacingOccurrences(of: ".", with: "/"))
-            process.arguments = arguments
+            format(arguments: arguments, process: process, testName: name)
             
-            var environment = ProcessInfo.processInfo.environment
+            var environment = name.hasPrefix("-") ? [:] : ProcessInfo.processInfo.environment
             environment[childProcessEnvVariable] = childProcessEnvVariableOnValue
             process.environment = environment
             
             do {
                 try process.run()
                 process.waitUntilExit()
-                XCTAssertEqual(process.terminationReason, .uncaughtSignal, "Child process should have crashed: \(process)")
+                if name.hasPrefix("-") {
+                    // Darwin tests catch the NSException and exit with `1` instead
+                    XCTAssertEqual(process.terminationStatus, 1, "Child process should have crashed: \(process)")
+                } else {
+                    XCTAssertEqual(process.terminationReason, .uncaughtSignal, "Child process should have crashed: \(process)")
+                }
             } catch {
                 XCTFail("Couldn't start child process for testing crash: \(process) - \(error)")
             }
             
         }
     }
+}
+
+// Running a test on `DarwinCompatibilityTests` vs `TestFoundation` does different things:
+// * They have different module names
+// * Their test names are formatted differently:
+//   * Darwin is Obj-C formatted
+//   * TestFoundation is Swift formatted
+// * Darwin gets a few extra options
+private func format(arguments: [String], process: Process, testName name: String) {
+    var arguments = arguments
+    arguments.remove(at: 0)
+    arguments.removeAll(where: { $0.hasPrefix("TestFoundation.") || $0.hasPrefix("DarwinCompatibilityTests.") })
+    
+    let _name = { () -> [String] in
+        if name.hasPrefix("-") {
+            arguments.removeAll(where: { $0.hasPrefix("DarwinCompatibilityTests.") })
+            // Darwin XCTest is running, we need to do the following:
+            // * The `name` is formatted differently
+            // * We need to add an explicit `-XCTest` before the name
+            // * We need to append the bundle path
+            let name = name.trimmingCharacters(in: .init(charactersIn: "-[]")).replacingOccurrences(of: " ", with: "/").replacingOccurrences(of: ".", with: "/")
+            return ["-XCTest", "DarwinCompatibilityTests." + name, ProcessInfo.processInfo.environment["XCTestBundlePath"]!]
+        } else {
+            arguments.removeAll(where: { $0.hasPrefix("TestFoundation.") })
+            return ["TestFoundation." + name.replacingOccurrences(of: ".", with: "/")]
+        }
+    }()
+    arguments.append(contentsOf: _name)
+    process.arguments = arguments
 }
 
 extension String {

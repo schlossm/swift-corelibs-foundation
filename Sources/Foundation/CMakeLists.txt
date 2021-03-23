@@ -132,6 +132,7 @@ add_library(Foundation
   Thread.swift
   Timer.swift
   TimeZone.swift
+  UndoManager.swift
   Unit.swift
   URL.swift
   URLComponents.swift

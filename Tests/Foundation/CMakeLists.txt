@@ -90,6 +90,7 @@ target_sources(TestFoundation PRIVATE
   Tests/TestThread.swift
   Tests/TestTimer.swift
   Tests/TestTimeZone.swift
+  Tests/TestUndoManager.swift
   Tests/TestUnitConverter.swift
   Tests/TestUnitVolume.swift
   Tests/TestUnit.swift

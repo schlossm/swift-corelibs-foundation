@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1078D01F260976FE00C64CD2 /* TestUndoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1078D01E260976FE00C64CD2 /* TestUndoManager.swift */; };
 		659FB6E02405E65D00F5F63F /* TestBridging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FB6DF2405E65D00F5F63F /* TestBridging.swift */; };
 		B91161AF242A385A00BD2907 /* TestDataURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91161AE242A385A00BD2907 /* TestDataURLProtocol.swift */; };
 		B917D32420B0DB9700728EE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B917D32320B0DB9700728EE0 /* Foundation.framework */; };
@@ -174,6 +175,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1078D01E260976FE00C64CD2 /* TestUndoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestUndoManager.swift; path = Tests/Foundation/Tests/TestUndoManager.swift; sourceTree = "<group>"; };
 		659FB6DF2405E65D00F5F63F /* TestBridging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestBridging.swift; path = Tests/Foundation/Tests/TestBridging.swift; sourceTree = "<group>"; };
 		B91161AE242A385A00BD2907 /* TestDataURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestDataURLProtocol.swift; path = Tests/Foundation/Tests/TestDataURLProtocol.swift; sourceTree = "<group>"; };
 		B917D31C20B0DB8B00728EE0 /* xdgTestHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xdgTestHelper; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -439,6 +441,7 @@
 				B94B07892401849800B244E8 /* TestURLResponse.swift */,
 				B94B07A52401849A00B244E8 /* TestURLSession.swift */,
 				B94B079F2401849A00B244E8 /* TestURLSessionFTP.swift */,
+				1078D01E260976FE00C64CD2 /* TestUndoManager.swift */,
 				B94B07742401849600B244E8 /* TestUserDefaults.swift */,
 				B94B077A2401849700B244E8 /* TestUtils.swift */,
 				B94B077B2401849700B244E8 /* TestUUID.swift */,
@@ -686,6 +689,7 @@
 				B94B07D82401849B00B244E8 /* TestNSNumberBridging.swift in Sources */,
 				B9F4492A2483FA1E00B30F02 /* TestNSURL.swift in Sources */,
 				B94B07D92401849B00B244E8 /* TestOperationQueue.swift in Sources */,
+				1078D01F260976FE00C64CD2 /* TestUndoManager.swift in Sources */,
 				B94B07DA2401849B00B244E8 /* TestJSONEncoder.swift in Sources */,
 				B94B07DB2401849B00B244E8 /* TestNSKeyedArchiver.swift in Sources */,
 				B94B07DC2401849B00B244E8 /* TestUtils.swift in Sources */,
